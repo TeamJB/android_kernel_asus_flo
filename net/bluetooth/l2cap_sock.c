@@ -201,7 +201,7 @@ static int l2cap_sock_connect(struct socket *sock, struct sockaddr *addr, int al
 		l2cap_pi(sk)->mode, sk->sk_state);
 
 	if (!addr || alen < sizeof(addr->sa_family) ||
-		addr->sa_family != AF_BLUETOOTH)
+	    addr->sa_family != AF_BLUETOOTH)
 		return -EINVAL;
 
 	memset(&la, 0, sizeof(la));
@@ -763,7 +763,7 @@ static int l2cap_sock_setsockopt(struct socket *sock, int level, int optname, ch
 				break;
 			}
 
-			if (smp_conn_security(conn->hcon, sec.level))
+			if (smp_conn_security(conn, sec.level))
 				break;
 
 			err = 0;
